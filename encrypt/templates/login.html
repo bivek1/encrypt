@@ -1,0 +1,52 @@
+
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}
+    Login to Online Encryption Center
+{% endblock title %}
+
+
+{% block content %}
+    <div class="container-fluid background p-3">
+
+        <div class="row">
+           
+            <div class="col-12 col-md-4 m-auto loginbox p-2 pt-2 pb-5">  
+                {% for i in messages  %}
+                <div class="alert alert-warning" role="alert">
+                    Username or Password did not match
+                </div>
+                {% endfor %} 
+                <h3 class="text-warning ps-2">LOGIN</h3>
+                <small class="ps-2">Please Login For your Online encrpted Section</small>
+                <!-- Adding Login image for good appereance -->
+                <div class="text-center loginImg">
+                    <img src="{%static 'img/login.png'%}" alt="" srcset="">
+                </div>
+                <!-- Login text field username and password -->
+                <div class="p-2">
+                    <form action="" method="post">
+                        <input type="text" class="form-control mt-2" placeholder="username" name="username" required>
+                        <input type="password" class="form-control mt-2" placeholder="password" name="password" required>
+                        {%csrf_token%}
+                        <button class="btn btn-warning mt-2">
+                            Login
+                        </button>
+                        <hr>
+                        <small class="d-block">
+                            Don't have an account.
+                        </small>
+                        <a href="{%url 'decrypt:signup'%}">
+                            <button type="button" class="btn btn-secondary">
+                                Sign Up
+                            </button>
+                        </a>
+                       
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock content %}
+    

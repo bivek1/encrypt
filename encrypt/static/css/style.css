@@ -1,0 +1,57 @@
+.background{
+    background-color: rgb(243, 243, 243);
+}
+.encryptBox{
+    height: 500px;
+    background-color: white;
+    box-shadow: 5px 5px 5px 5px rgba(120, 120, 120, 0.4);
+}
+.chooseBox{
+    width: 100%;
+    padding: 20px;
+    background-color: rgb(243, 243, 243);
+    box-shadow: 5px 5px 5px 5px rgba(120, 120, 120, 0.4);
+    cursor: pointer;
+}
+.chooseBox:hover{
+    background-color: rgb(255, 255, 255);
+    transition-duration: .2s;
+}
+.chooseBox p{
+    font-size: 60px;
+}
+
+.loginbox{
+    background-color: white;
+    box-shadow: 5px 5px 5px 5px rgba(120, 120, 120, 0.4);
+}
+.loginImg img{
+    height: 160px;
+    width: auto;
+}
+.Dashboardbox{
+    background-color: white;
+    box-shadow: 5px 5px 5px 5px rgba(120, 120, 120, 0.4);
+}
+.uploadBox{
+    border: 1px solid black;
+}
+.fa-cloud-arrow-up{
+    font-size: 250px;
+}
+.fa-key{
+    font-size: 100px;
+}
+.fa-cloud-meatball{
+    font-size: 100px;
+}
+.fa-lock{
+    font-size: 100px;
+}
+.fileHere{
+    background-color: white;
+    box-shadow: 5px 5px 5px 5px rgba(120, 120, 120, 0.4);
+}
+.asae{
+    font-size: 70px;
+}

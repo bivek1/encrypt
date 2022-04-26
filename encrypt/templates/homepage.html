@@ -1,0 +1,100 @@
+
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}
+    {{user.username}} Portal
+{% endblock title %}
+
+{% block content %}
+    <div class="container-fluid background p-3">
+        <div class="row">
+            <div class="col-12 col-md-11 m-auto Dashboardbox pb-5 pt-2">
+                <h3 class="text-warning">{{user.username|capfirst}} Portal</h3>
+                <hr>
+                <div class="row">
+                     <!-- Selecting File for encryption and Upload -->
+                    <div class="col-md-6 col-12">
+                        {% for i in messages  %}
+                        <div class="alert alert-warning" role="alert">
+                           {{i}}
+                        </div>
+                        {% endfor %} 
+                        <div class="uploadBox text-center p-4">
+                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                            <p>Upload Your Files for Encryption..</p>
+                            <form action="" method="post" enctype="multipart/form-data">
+                                <input class="form-control " type="file" name="userFile">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-success btn-block mt-3 w-100">
+                                    Encrypt File Upload 
+                                </button>
+                            </form>
+                           
+                        </div>
+                        
+                    </div>
+                    <!-- Different File method for encryption and Upload -->
+                    <div class="col-md-6 col-12">
+                        <p>Choose Your Encryption method.</p>
+                        <hr>
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="chooseBox text-center">
+                                    <i class="fas fa-cloud-meatball"></i>
+                                    <h5 class="text-center mt-2">AES</h5>
+                                </div>
+                             
+                            </div>
+                            <div class="col-4">
+                                <div class="chooseBox text-center">
+                                    <i class="fas fa-key"></i>
+                                    <h5 class="text-center mt-2">RSA</h5>
+                                </div>
+                              
+                            </div>
+                            <div class="col-4">
+                                <div class="chooseBox text-center">
+                                    <i class="fas fa-lock"></i>
+                                    <h5 class="text-center mt-2">BlowFish</h5>
+                                </div>
+                              
+                            </div>
+                            <div class="col-12">
+                                <div class="chooseBox text-center mt-3">
+                                    <i class="fas fa-lock"></i>
+                                    <h5 class="text-center mt-2">MultiEncryption</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <!-- Your Encrypted File  -->
+                <div class="FileBox mt-3">
+                    <div class="row">
+                        <h5>Your Files</h5>
+                        <small>Your files are encrypted only you can decrypt and download it.</small>
+                        {% for i in filelist  %}
+                            <div class="col-md-3 col-4 mt-3">
+                                <div class="fileHere text-center p-2">
+                                    <i class="fa fa-file asae"></i>
+                                    <h5>{{i.name}}</h5>
+                                    <button class="btn btn-sm">
+                                        <i class="fa fa-eye"></i>
+                                        Decrypt and Download
+                                    </button>
+                                </div>
+                            </div>
+                        {% endfor %}
+                            
+                      
+                    </div>
+                </div>
+
+                
+            </div>
+           
+        </div>
+    </div>
+{% endblock content %}
+    
