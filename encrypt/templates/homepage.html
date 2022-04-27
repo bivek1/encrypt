@@ -11,6 +11,35 @@
             <div class="col-12 col-md-11 m-auto Dashboardbox pb-5 pt-2">
                 <h3 class="text-warning">{{user.username|capfirst}} Portal</h3>
                 <hr>
+              
+                <!-- Your Encrypted File  -->
+                <div class="FileBox mt-3">
+                    <div class="row">
+                        <h5>Your Files</h5>
+                        <small>Your files are encrypted only you can decrypt and download it.</small>
+                        {% for i in filelist  %}
+                            <div class="col-md-3 col-4 mt-3">
+                                <div class="fileHere text-center p-2">
+                                    <i class="fa fa-file asae"></i>
+                                    <h5>{{i.name}}</h5>
+                                    <a href="{{i.file.url}}" download>
+                                        <button class="btn btn-sm">
+                                            <i class="fa fa-eye"></i>
+                                            Decrypt and Download
+                                        </button>
+                                    </a>
+                                   
+                                </div>
+                            </div>
+                        {% endfor %}
+                            
+                      
+                    </div>
+                </div>
+
+                <hr>
+                <h4 class="text-danger">Encrypt And Upload Your Files</h4>
+                <hr>
                 <div class="row">
                      <!-- Selecting File for encryption and Upload -->
                     <div class="col-md-6 col-12">
@@ -23,7 +52,8 @@
                             <i class="fa-solid fa-cloud-arrow-up"></i>
                             <p>Upload Your Files for Encryption..</p>
                             <form action="" method="post" enctype="multipart/form-data">
-                                <input class="form-control " type="file" name="userFile">
+                                <input class="form-control mb-2" type="text" name="nameFile" placeholder="File Name" required>
+                                <input class="form-control " type="file" name="userFile" required>
                                 {% csrf_token %}
                                 <button type="submit" class="btn btn-success btn-block mt-3 w-100">
                                     Encrypt File Upload 
@@ -68,29 +98,7 @@
                         </div>
                     </div>
                 </div>
-                <hr>
-                <!-- Your Encrypted File  -->
-                <div class="FileBox mt-3">
-                    <div class="row">
-                        <h5>Your Files</h5>
-                        <small>Your files are encrypted only you can decrypt and download it.</small>
-                        {% for i in filelist  %}
-                            <div class="col-md-3 col-4 mt-3">
-                                <div class="fileHere text-center p-2">
-                                    <i class="fa fa-file asae"></i>
-                                    <h5>{{i.name}}</h5>
-                                    <button class="btn btn-sm">
-                                        <i class="fa fa-eye"></i>
-                                        Decrypt and Download
-                                    </button>
-                                </div>
-                            </div>
-                        {% endfor %}
-                            
-                      
-                    </div>
-                </div>
-
+              
                 
             </div>
            

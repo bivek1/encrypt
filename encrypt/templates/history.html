@@ -1,0 +1,41 @@
+{% extends 'index.html' %}
+
+
+{% block title %}
+    History
+{% endblock title %}
+    
+
+{% block content %}
+<div class="container-fluid background p-3">
+    <div class="row">
+        <div class="col-12 col-md-11 m-auto Dashboardbox pb-5 pt-2">
+            <h3 class="text-warning">{{user.username|capfirst}} History</h3>
+            <hr>
+            <!-- Your Encrypted File  -->
+            <div class="FileBox mt-3">
+                <div class="row">
+                    <h5>Your History</h5>
+                    <small>Your file Encryption History is Available for you...</small>
+                    {% for i in history  %}
+                        <div class="col-md-12 col-12 mt-3">
+                            <div class="fileHere text-center p-2">
+                                <p > <i class="fas fa-info-circle"></i>  You have Encrypted Files at </p>
+                                
+                                <small>{{i.date}}</small>
+                              
+                            </div>
+                        </div>
+                    {% endfor %}
+                        
+                  
+                </div>
+            </div>
+
+            
+        </div>
+       
+    </div>
+</div>
+{% endblock content %}
+    

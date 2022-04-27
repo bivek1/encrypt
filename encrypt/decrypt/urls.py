@@ -8,5 +8,8 @@ urlpatterns = [
     path('login', views.LoginF, name="login"),
     path('homepage', views.userHomepage, name="userhome"),
     path('signup', views.signUp, name="signup"),
+    path('history', views.history, name = "history"),
+    path('encryption', views.encrypt, name = "encrypt"),
+    path('decryption', views.decrypt, name = "decrypt"),
     path('logout', views.Logout, name="logout")
 ]

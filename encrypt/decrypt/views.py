@@ -6,6 +6,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.contrib.auth.models import User
 from .models import History, FileList
+import datetime
 # Create your views here.
 def homepage(request):
     return render(request, "index.html")
@@ -28,7 +29,9 @@ def userHomepage(request):
     fil = FileList.objects.filter(user = request.user)
     if request.method == 'POST':
         file = request.FILES['userFile']
-        FileList.objects.create(name="new", file = file, user = request.user)
+        name = request.POST['nameFile']
+        obj = FileList.objects.create(name=name, file = file, user = request.user)
+        History.objects.create(file = obj)
         messages.success(request,"Successfully Added File")
         return HttpResponseRedirect(reverse('decrypt:userhome'))
     dist ={
@@ -36,6 +39,17 @@ def userHomepage(request):
     }
     return render(request, "homepage.html", dist)
 
+
+def encrypt(request):
+    return render(request, "encrypt/encrypt.html")
+
+
+
+
+def decrypt(request):
+    return render(request, "decrypt/decrypt.html")
+
+    
 
 def signUp(request):
     if request.method == 'POST':
@@ -64,3 +78,12 @@ def signUp(request):
 def Logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('decrypt:login'))
+
+
+def history(request):
+    history = History.objects.filter(file__user =request.user)
+    dist = {
+        'history':history,
+    }
+
+    return render(request, "history.html", dist)

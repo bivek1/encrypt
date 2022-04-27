@@ -12,7 +12,7 @@ class FileList(models.Model):
 
 class History(models.Model):
     file = models.ForeignKey(FileList, related_name="filelist", on_delete=models.PROTECT)
-    date = models.DateTimeField()
+    date = models.DateTimeField(auto_now_add=True)
     objects = models.Manager()
 
     def __str__(self):
