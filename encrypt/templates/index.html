@@ -79,7 +79,12 @@
                     <h6 class="text-center p-0 m-0">Choose Your Options</h6>
                     <div class="row mt-4">
                         <div class="col-md-4 col-12 p-3">
-                            <a href="{%url 'decrypt:encrypt'%}">
+                            
+                                {% if user.is_authenticated %}
+                                <a href="{%url 'decrypt:userhome'%}">
+                                {%else%}
+                                <a href="{%url 'decrypt:login'%}">
+                                {% endif %}
                                 <div class="chooseBox p-3 text-center">
                                     <p>
                                         <i class="fas fa-file-archive text-warning"></i>
@@ -88,19 +93,21 @@
                                         Encrypt File
                                     </h2>
                                     <small class="text-dark">
-                                        You can incredebly encrypt your files and save it to you local disk with out sign up
+                                        You can incredebly encrypt your files and save it to Cloud
                                     </small>
                                 </div>
                             </a>
                         </div>
 
                         <div class="col-md-4 col-12 p-3">
-                            <a href="{%url 'decrypt:decrypt'%}">
+                                {% if user.is_authenticated %}
+                                <a href="{%url 'decrypt:userhome'%}">
+                                {%else%}
+                                <a href="{%url 'decrypt:login'%}">
+                                {% endif %}
                                 <div class="chooseBox p-3 text-center">
                                     <p>
-                                        <i class="fas fa-file-alt text-primary"></i>
-                                   
-                                      
+                                        <i class="fas fa-file-alt text-primary"></i>      
                                     </p>
                                     <h2 class="text-primary">
                                         Decrypt File
@@ -117,8 +124,7 @@
                             {%else%}
                             <a href="{%url 'decrypt:login'%}">
                             {% endif %}
-                                
-                            
+
                                 <div class="chooseBox p-3 text-center">
                                     <p>
                                         <i class="fas fa-tachometer-alt text-success"></i>

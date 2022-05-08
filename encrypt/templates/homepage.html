@@ -20,9 +20,10 @@
                         {% for i in filelist  %}
                             <div class="col-md-3 col-4 mt-3">
                                 <div class="fileHere text-center p-2">
+                                    <span class=" d-block mb-2 badge bg-danger">Encrypted</span>
                                     <i class="fa fa-file asae"></i>
                                     <h5>{{i.name}}</h5>
-                                    <a href="{{i.file.url}}" download>
+                                    <a href="{%url 'decrypt:decrypt' i.id%}">
                                         <button class="btn btn-sm">
                                             <i class="fa fa-eye"></i>
                                             Decrypt and Download
@@ -55,9 +56,28 @@
                                 <input class="form-control mb-2" type="text" name="nameFile" placeholder="File Name" required>
                                 <input class="form-control " type="file" name="userFile" required>
                                 {% csrf_token %}
-                                <button type="submit" class="btn btn-success btn-block mt-3 w-100">
-                                    Encrypt File Upload 
-                                </button>
+                                  <!-- Pop up Password Save for AES -->
+                                  <div class="modal fade" id="exampleModalAES" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">You have Choosen AES Encryption</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Password</p>
+                                            <input class="form-control" type="password" name="password" placeholder="password">
+                                        </div>
+                                        <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Exit Encryption</button>
+                                    
+                                        <button type="submit" class="btn btn-primary">Encrypt File with AES</button>
+                                    
+                                        
+                                        </div>
+                                    </div>
+                                    </div>
+                                  </div>
                             </form>
                            
                         </div>
@@ -69,10 +89,11 @@
                         <hr>
                         <div class="row">
                             <div class="col-4">
-                                <div class="chooseBox text-center">
+                                <div class="chooseBox text-center" data-bs-toggle="modal" data-bs-target="#exampleModalAES">
                                     <i class="fas fa-cloud-meatball"></i>
                                     <h5 class="text-center mt-2">AES</h5>
                                 </div>
+                              
                              
                             </div>
                             <div class="col-4">

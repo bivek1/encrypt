@@ -1,0 +1,71 @@
+
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}
+    Decrypt File
+{% endblock title %}
+
+{% block content %}
+    <div class="container-fluid background p-3">
+        <div class="row">
+            <div class="col-12 col-md-11 m-auto Dashboardbox pb-5 pt-2">
+            
+                <hr>
+              
+                <!-- Your Encrypted File  -->
+                <div class="FileBox mt-3">
+                    <div class="row">
+                        {% for i in messages  %}
+                            <div class="alert alert-warning" role="alert">
+                            {{i}}
+                            </div>
+                        {% endfor %} 
+                        <h5>Your Files</h5>
+                        <small>Decrypt and Download Your File</small>
+                        <div class="col-md-3 col-12 mt-3">
+                            <div class="fileHere text-center p-2">
+                                <span class=" d-block mb-2 badge bg-danger">Encrypted</span>
+                                <i class="fa fa-file asae"></i>
+                                <h5>{{file.name}}</h5>
+                               
+                               
+                            </div>
+                        </div>
+                        <div class="col-md-9 col-12">
+                            <form action="" method="post">
+                                <!-- <img src="{{file.file.url}}" alt=""> -->
+                                {% if not file.decrypted %}
+                                    <p>Enter Your password for Decryption....</p>
+                                    <input type="text" class="form-control" name="password" placeholder="Password" required>
+                                {% endif %}
+                                    
+                                
+                                {%csrf_token%}
+                                
+                                {% if file.decrypted %}
+                                <a href="{{file.file.url}}" download>
+                                   <small>Download Your File</small>
+                                </a>
+                                    
+                                {%else%}
+                                    <button class="btn btn-danger mt-3" type="submit">
+                                        Decrypt
+                                    </button>
+                                {% endif %}
+                                    
+                              
+                            </form>
+                          
+                        </div>
+                            
+                      
+                    </div>
+                </div>
+
+        
+            </div>
+           
+        </div>
+    </div>
+{% endblock content %}
+    

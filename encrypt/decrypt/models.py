@@ -1,9 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
+
 class FileList(models.Model):
     name = models.CharField(max_length=200)
     file = models.FileField(upload_to='encrypt/')
+    decrypted = models.BooleanField(default= False)
     objects = models.Manager()
     user = models.ForeignKey(User, related_name="user_file", on_delete=models.CASCADE)
 

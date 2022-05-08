@@ -1,13 +1,17 @@
-from urllib import request
+from hashlib import new
+from re import T
+from urllib import request, response
 from django.urls import reverse
-from django.http import HttpResponseRedirect
+from django.http import FileResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.contrib.auth.models import User
 from .models import History, FileList
-import datetime
-# Create your views here.
+from .aes import EncryptNow, DecryptNow
+from django.conf import settings
+# Import mimetypes module
+
 def homepage(request):
     return render(request, "index.html")
 
@@ -26,12 +30,24 @@ def LoginF(request):
         return render(request, "login.html")
 
 def userHomepage(request):
-    fil = FileList.objects.filter(user = request.user)
+    fil = FileList.objects.filter(user = request.user).filter(decrypted= False)
     if request.method == 'POST':
         file = request.FILES['userFile']
         name = request.POST['nameFile']
+        password = request.POST['password']
+
+        # Adding File or object to database
         obj = FileList.objects.create(name=name, file = file, user = request.user)
         History.objects.create(file = obj)
+        print(obj.file.url)
+        raw_path = str(settings.MEDIA_ROOT)
+        print(raw_path)
+        path = raw_path+"\\encrypt\\"+str(file)
+        EncryptNow(path, password)
+        obj.file = path+".enc"
+        obj.save()
+        # os.remove(path)
+
         messages.success(request,"Successfully Added File")
         return HttpResponseRedirect(reverse('decrypt:userhome'))
     dist ={
@@ -40,14 +56,27 @@ def userHomepage(request):
     return render(request, "homepage.html", dist)
 
 
-def encrypt(request):
-    return render(request, "encrypt/encrypt.html")
+def decrypt(request, id):
+    file = FileList.objects.get(id = id)
 
+    dist = {
+        'file':file
+    }
 
-
-
-def decrypt(request):
-    return render(request, "decrypt/decrypt.html")
+    if request.method == 'POST':
+        password = request.POST['password']
+        print(password)
+        print(file.file.url)
+        DecryptNow(str(file.file), password)
+        path = str(file.file)[:-4]
+        file.file = path
+        file.decrypted = True
+        file.save()
+        return HttpResponseRedirect(reverse('decrypt:decrypt', args=[file.id]))
+        # except:
+        #     messages.success(request, "Your password Didn't match")
+        #     return HttpResponseRedirect(reverse('decrypt:decrypt', args=[file.id]))
+    return render(request, "decrypt.html", dist)
 
     
 
