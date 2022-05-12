@@ -16,8 +16,8 @@
                 <div class="FileBox mt-3">
                     <div class="row">
                         {% for i in messages  %}
-                            <div class="alert alert-warning" role="alert">
-                            {{i}}
+                            <div class="alert alert-warning m-2" role="alert">
+                                {{i}}
                             </div>
                         {% endfor %} 
                         <h5>Your Files</h5>
@@ -37,9 +37,16 @@
                                 {% if not file.decrypted %}
                                     <p>Enter Your password for Decryption....</p>
                                     <input type="text" class="form-control" name="password" placeholder="Password" required>
+                                    <p>Select Decryption Method </p>
+                                    <select name="action" class="form-control" required>
+                                        <option value="aes">AES</option>
+                                        <option value="rsa">RSA</option>
+                                        <option value="blow">Blow Fish</option>
+                                        <option value="multi">Multi Encryption</option>
+                                    </select>
                                 {% endif %}
                                     
-                                
+
                                 {%csrf_token%}
                                 
                                 {% if file.decrypted %}

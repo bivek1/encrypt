@@ -1,0 +1,79 @@
+
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}
+    Blow Fish Encryption
+{% endblock title %}
+
+{% block content %}
+    <div class="container-fluid background p-3">
+        <div class="row">
+            <div class="col-12 col-md-11 m-auto Dashboardbox pb-5 pt-2">
+                <h3 class="text-warning">Blow Fish Encryption</h3>
+                <hr>
+                <h4 class="text-danger">Encrypt And Upload Your Files with Blow Fish Method</h4>
+                <hr>
+                <div class="row">
+                     <!-- Selecting File for encryption and Upload -->
+                    <div class="col-md-6 col-12">
+                        {% for i in messages  %}
+                        <div class="alert alert-warning" role="alert">
+                           {{i}}
+                        </div>
+                        {% endfor %} 
+                        <div class="uploadBox text-center p-4">
+                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                            <p>Upload Your Files for Encryption..</p>
+                            <form action="" method="post" enctype="multipart/form-data">
+                                <input class="form-control mb-2" type="text" name="nameFile" placeholder="File Name" required>
+                                <input class="form-control " type="file" name="userFile" required>
+                                {% csrf_token %}
+                                  <!-- Pop up Password Save for Blow Fish -->
+                                  <div class="modal fade" id="exampleModalBlowFish" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">You have Choosen Blow Fish Encryption</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Password</p>
+                                            <input class="form-control" type="password" name="password" placeholder="password">
+                                        </div>
+                                        <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Exit Encryption</button>
+                                    
+                                        <button type="submit" class="btn btn-primary">Encrypt File with Blow Fish</button>
+                                    
+                                        
+                                        </div>
+                                    </div>
+                                    </div>
+                                  </div>
+                            </form>
+                           
+                        </div>
+                        
+                    </div>
+                    <!-- Different File method for encryption and Upload -->
+                    <div class="col-md-6 col-12">
+                        <p>Encrypt  With Blow Fish method.</p>
+                        <hr>
+                        <div class="row">
+                                <div class="col-12">
+                                    <div class="chooseBox text-center" data-bs-toggle="modal" data-bs-target="#exampleModalBlowFish">
+                                        <i class="fas fa-cloud-meatball"></i>
+                                        <h5 class="text-center mt-2">ENCRYPT (Blow Fish)</h5>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+              
+                
+            </div>
+           
+        </div>
+    </div>
+{% endblock content %}
+    
